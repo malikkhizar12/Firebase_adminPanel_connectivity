@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "560492419770",
+    "project_id": "best-footwears",
+    "storage_bucket": "best-footwears.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:560492419770:android:709935af2e63537b9c0083",
+        "android_client_info": {
+          "package_name": "com.example.best_foot_wears"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDHfsdoHFgqu3EIXjrVB8CTatJKpHthNXo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
