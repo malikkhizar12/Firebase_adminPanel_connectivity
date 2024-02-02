@@ -1,14 +1,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 
+import '../models/product_model.dart';
+
 class HomeController extends GetxController {
   FirebaseFirestore fireStore = FirebaseFirestore.instance;
   late CollectionReference productCollection;
   RxString selectedCategory = ''.obs;
   RxString selectedBrand = ''.obs;
+  RxList<ProductModel> products = <ProductModel>[].obs;
   @override
   void onInit() {
     productCollection = fireStore.collection('products');
+    fetchProducts();
     super.onInit();
   }
 
@@ -16,7 +20,7 @@ class HomeController extends GetxController {
     required String productName,
     required String productDescription,
     required String imageUrl,
-    required String price,
+    required int price,
     required String category,
     required String brand,
     required bool hasOffers,
@@ -38,4 +42,17 @@ class HomeController extends GetxController {
       // You might want to throw an exception here or handle it as needed
     }
   }
+  Future<void> fetchProducts() async {
+    try {
+      QuerySnapshot productSnap = await productCollection.get();
+
+      products.value = productSnap.docs
+          .map((doc) => ProductModel.fromFirestore(doc as QueryDocumentSnapshot<Map<String, dynamic>>))
+          .toList();
+    } catch (e) {
+      print('Error fetching products: $e');
+      // Handle error as needed
+    }
+  }
+
 }

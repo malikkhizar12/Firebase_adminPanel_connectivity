@@ -182,16 +182,27 @@ class AddProduct extends StatelessWidget {
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: () {
-                      ctrl.addProduct(
-                        productName: productNameController.text,
-                        productDescription: productDescriptionController.text,
-                        imageUrl: imageUrlController.text,
-                        price: priceController.text,
-                        category: ctrl.selectedCategory.value, // Use the selected category from HomeController
-                        brand: ctrl.selectedBrand.value, // Use the selected brand from HomeController
-                        hasOffers: offerController.text == 'true', // Assuming offerController.text is 'true' or 'false'
-                      );
+                      // Attempt to parse the text from priceController to an integer
+                      int? price = int.tryParse(priceController.text);
+
+                      // Check if parsing was successful
+                      if (price != null) {
+                        ctrl.addProduct(
+                          productName: productNameController.text,
+                          productDescription: productDescriptionController.text,
+                          imageUrl: imageUrlController.text,
+                          price: price,  // Use the parsed integer as the price
+                          category: ctrl.selectedCategory.value,
+                          brand: ctrl.selectedBrand.value,
+                          hasOffers: offerController.text == 'true',
+                        );
+                      } else {
+                        // Handle the case where parsing failed (text is not a valid integer)
+                        print('Invalid price format');
+                        // You might want to show an error message to the user or take appropriate action
+                      }
                     },
+
                     child: Text(
                       "Add Product",
                       style: TextStyle(
