@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../models/product_model.dart';
@@ -25,6 +26,7 @@ class HomeController extends GetxController {
     required String brand,
     required bool hasOffers,
   }) async {
+    startLoading();
     try {
       await productCollection.add({
         'productName': productName,
@@ -36,7 +38,10 @@ class HomeController extends GetxController {
         'hasOffers': hasOffers,
       });
 
+
       print('Product added to Firestore successfully!');
+      stopLoading();
+      Get.toNamed("/");
     } catch (e) {
       print('Error adding product to Firestore: $e');
       // You might want to throw an exception here or handle it as needed
@@ -49,10 +54,27 @@ class HomeController extends GetxController {
       products.value = productSnap.docs
           .map((doc) => ProductModel.fromFirestore(doc as QueryDocumentSnapshot<Map<String, dynamic>>))
           .toList();
+      products.refresh();
     } catch (e) {
       print('Error fetching products: $e');
       // Handle error as needed
     }
   }
-
+  startLoading(){
+    Get.dialog(showLoader(), barrierDismissible: false,);
+  }
+  stopLoading(){
+    Get.back();
+  }
+  showLoader({double height = 50, double width = 50}) {
+    return Center(
+      child: SizedBox(
+        height: height,
+        width: width,
+        child: const CircularProgressIndicator(
+          color: Colors.redAccent,
+        ),
+      ),
+    );
+  }
 }

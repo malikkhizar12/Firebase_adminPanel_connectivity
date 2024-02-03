@@ -5,42 +5,46 @@ import 'package:get/get.dart';
 import '../controllers/home_controller.dart';
 import '../models/product_model.dart';
 
-class HomePage extends StatelessWidget {
-  HomePage({super.key});
-
+class HomePage extends GetView<HomeController>{
+   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
 
-    return GetBuilder<HomeController>(builder: (ctrl) {
       return Scaffold(
-
         appBar: AppBar(
-          title: Center(child: Text('Best Foot Wears')),
-
+          actions: [
+            IconButton(onPressed: (){
+              controller.products.refresh();
+              controller.update();
+              Get.toNamed("/");
+            }, icon: const Icon(Icons.refresh_outlined))
+          ],
+          title: const Center(child: Text('Best Foot Wears')),
         ),
         body: ListView.builder(
-            itemCount: ctrl.products.length,
-            itemBuilder: (context, index) {
-              ProductModel product = ctrl.products[index];
-              return ListTile(
-                title: Text(product.productName),
-                subtitle: Text(product.productDescription),
-
-                trailing: IconButton(
-                  icon: Icon(Icons.delete),
-                  onPressed: () {},
-                ),
-              );
-            }
+          itemCount: controller.products.length,
+          itemBuilder: (context, index) {
+            ProductModel product = controller.products[index];
+            return ListTile(
+              title: Text(product.productName),
+              subtitle: Text('₨${product.price.toString()}'), // Display the price in PKR
+              trailing: IconButton(
+                icon: const Icon(Icons.delete),
+                onPressed: () {
+                  // Implement delete functionality if needed
+                },
+              ),
+            );
+          },
         ),
         floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.add),
-          onPressed: () {
-            Get.to(AddProduct());
+          child: const Icon(Icons.add),
+          onPressed: () async {
+            await Get.to(AddProduct());
+            controller.fetchProducts(); // Fetch products when returning from AddProduct
           },
         ),
       );
-    });
-  }
+    }
 }

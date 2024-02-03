@@ -18,27 +18,27 @@ class AddProduct extends StatelessWidget {
     return GetBuilder<HomeController>(builder: (ctrl) {
       return Scaffold(
         appBar: AppBar(
-          title: Text('Add Product'),
+          title: const Text('Add Product'),
         ),
         body: SingleChildScrollView(
           child: Container(
-            margin: EdgeInsets.symmetric(horizontal: 20),
+            margin: const EdgeInsets.symmetric(horizontal: 20),
             child: Column(
               children: [
-                SizedBox(height: 15,),
-                Center(
+                const SizedBox(height: 15,),
+                const Center(
                   child: Text('Add New Product', style: TextStyle(
                       fontSize: 35,
                       fontWeight: FontWeight.bold,
                       color: Colors.brown
                   ),),
                 ),
-                SizedBox(height: 15,),
+                const SizedBox(height: 15,),
 
                 Container(
                   child: TextField(
                     controller: productNameController,
-                    style: TextStyle(
+                    style: const TextStyle(
                         textBaseline: TextBaseline.alphabetic,
                         fontSize: 18
                     ),
@@ -46,13 +46,13 @@ class AddProduct extends StatelessWidget {
                       // contentPadding: EdgeInsets.symmetric( horizontal: 16.0),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(8.0),
-                          borderSide: BorderSide(
+                          borderSide: const BorderSide(
                             color: Colors.black,
                           ),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(8.0),
-                          borderSide: BorderSide(
+                          borderSide: const BorderSide(
                             color: Colors.red,
                           ),
                         ),
@@ -63,11 +63,11 @@ class AddProduct extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(height: 15,),
+                const SizedBox(height: 15,),
                 Container(
                   child: TextField(
                     controller: productDescriptionController,
-                    style: TextStyle(
+                    style: const TextStyle(
                         fontSize: 18
                     ),
                     maxLines: 8,
@@ -75,13 +75,13 @@ class AddProduct extends StatelessWidget {
                       // contentPadding: EdgeInsets.symmetric( horizontal: 16.0),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(8.0),
-                          borderSide: BorderSide(
+                          borderSide: const BorderSide(
                             color: Colors.black,
                           ),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(8.0),
-                          borderSide: BorderSide(
+                          borderSide: const BorderSide(
                             color: Colors.red,
                           ),
                         ),
@@ -90,25 +90,25 @@ class AddProduct extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(height: 15,),
+                const SizedBox(height: 15,),
 
                 Container(
                   child: TextField(
                     controller: imageUrlController,
-                    style: TextStyle(
+                    style: const TextStyle(
                         fontSize: 18
                     ),
                     decoration: InputDecoration(
                       // contentPadding: EdgeInsets.symmetric( horizontal: 16.0),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(8.0),
-                          borderSide: BorderSide(
+                          borderSide: const BorderSide(
                             color: Colors.black,
                           ),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(8.0),
-                          borderSide: BorderSide(
+                          borderSide: const BorderSide(
                             color: Colors.red,
                           ),
                         ),
@@ -119,25 +119,25 @@ class AddProduct extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(height: 15,),
+                const SizedBox(height: 15,),
 
                 Container(
                   child: TextField(
                     controller: priceController,
-                    style: TextStyle(
+                    style: const TextStyle(
                         fontSize: 18
                     ),
                     decoration: InputDecoration(
                       // contentPadding: EdgeInsets.symmetric( horizontal: 16.0),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(8.0),
-                          borderSide: BorderSide(
+                          borderSide: const BorderSide(
                             color: Colors.black,
                           ),
                         ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(8.0),
-                          borderSide: BorderSide(
+                          borderSide: const BorderSide(
                             color: Colors.red,
                           ),
                         ),
@@ -148,11 +148,11 @@ class AddProduct extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(height: 15,),
+                const SizedBox(height: 15,),
                 Row(
                   children: [
                     Flexible(child: DropDownBtn(
-                      items: ['Runner shoes', 'sandles', 'Formals'],
+                      items: const ['Runner shoes', 'sandles', 'Formals'],
                       selectedItemtext: 'Category',
                       onSelected: (selectedValue) {
                         ctrl.selectedCategory = selectedValue as RxString; // Assuming you have a variable in HomeController to hold the selected bran
@@ -161,7 +161,7 @@ class AddProduct extends StatelessWidget {
                     ),
 
                     Flexible(
-                        child: DropDownBtn(items: ['Puma', 'Nike', 'Adidas'],
+                        child: DropDownBtn(items: const ['Puma', 'Nike', 'Adidas'],
                           selectedItemtext: 'Brand',
                           onSelected: (selectedValue) {
                             ctrl.selectedBrand = selectedValue as RxString; // Assuming you have a variable in HomeController to hold the selected brand
@@ -170,18 +170,19 @@ class AddProduct extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(height: 15,),
-                Text('Offers?'),
-                SizedBox(height: 10,),
-                DropDownBtn(items: ['true', 'false'],
+                const SizedBox(height: 15,),
+                const Text('Offers?'),
+                const SizedBox(height: 10,),
+                DropDownBtn(items: const ['true', 'false'],
                   selectedItemtext: 'Offers?',
                   onSelected: (selectedValue) {},
                 ),
-                SizedBox(height: 15,),
+                const SizedBox(height: 15,),
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: () {
+
                       // Attempt to parse the text from priceController to an integer
                       int? price = int.tryParse(priceController.text);
 
@@ -196,23 +197,25 @@ class AddProduct extends StatelessWidget {
                           brand: ctrl.selectedBrand.value,
                           hasOffers: offerController.text == 'true',
                         );
+
+
                       } else {
                         // Handle the case where parsing failed (text is not a valid integer)
                         print('Invalid price format');
                         // You might want to show an error message to the user or take appropriate action
                       }
                     },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.pinkAccent.withOpacity(0.5),
+                    ),
 
-                    child: Text(
+                    child: const Text(
                       "Add Product",
                       style: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
                         fontSize: 16,
                       ),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      primary: Colors.pinkAccent.withOpacity(0.5),
                     ),
                   ),
                 ),

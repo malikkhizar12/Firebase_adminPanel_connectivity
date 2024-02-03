@@ -22,7 +22,7 @@ class ProductModel {
   });
 
   factory ProductModel.fromFirestore(QueryDocumentSnapshot<Map<String, dynamic>> doc) {
-    Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+    Map<String, dynamic> data = doc.data();
     return ProductModel(
       id: doc.id,
       productName: data['productName'] ?? '',

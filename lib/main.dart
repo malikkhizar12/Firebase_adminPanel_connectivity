@@ -1,5 +1,6 @@
 import 'package:best_foot_wears/Screens/home_page.dart';
 import 'package:best_foot_wears/controllers/home_controller.dart';
+import 'package:best_foot_wears/core/bindings.dart';
 import 'package:best_foot_wears/firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -20,12 +21,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'Best Foot Wears',
+      initialRoute: "/",
+      initialBinding: HomeBinding(),
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home:  HomePage(),
+      home: const HomePage(),
     );
   }
 }
