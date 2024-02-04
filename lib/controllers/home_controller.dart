@@ -38,7 +38,6 @@ class HomeController extends GetxController {
         'hasOffers': hasOffers,
       });
 
-
       print('Product added to Firestore successfully!');
       stopLoading();
       Get.toNamed("/");
@@ -59,6 +58,14 @@ class HomeController extends GetxController {
       print('Error fetching products: $e');
       // Handle error as needed
     }
+  }
+  void listenToProductsChanges() {
+    productCollection.snapshots().listen((QuerySnapshot<Map<String, dynamic>> snapshot) {
+      products.value = snapshot.docs
+          .map((doc) => ProductModel.fromFirestore(doc))
+          .toList();
+      products.refresh();
+    } as void Function(QuerySnapshot<Object?> event)?);
   }
   startLoading(){
     Get.dialog(showLoader(), barrierDismissible: false,);

@@ -1,16 +1,13 @@
 import 'package:best_foot_wears/Screens/add_product.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../controllers/home_controller.dart';
 import '../models/product_model.dart';
-
 class HomePage extends GetView<HomeController>{
    const HomePage({super.key});
-
-  @override
+   @override
   Widget build(BuildContext context) {
-
+controller.fetchProducts();
       return Scaffold(
         appBar: AppBar(
           actions: [
